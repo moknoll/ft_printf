@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moritzknoll <moritzknoll@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 19:17:44 by moritzknoll       #+#    #+#             */
-/*   Updated: 2024/11/04 10:46:08 by moritzknoll      ###   ########.fr       */
+/*   Created: 2024/11/04 10:52:15 by moritzknoll       #+#    #+#             */
+/*   Updated: 2024/11/04 11:15:10 by moritzknoll      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include <stdint.h>
+#include <stdio.h>
 
-# include <stdarg.h>
-# include <unistd.h>
+int main() {
+    int a = 42;
+    int *ptr = &a;
 
-int		ft_printf(const char *format, ...);
-int		ft_check_type(va_list args, const char format);
-int		ft_printchar(int c);
+    printf("The adress is %p, the value is %d", ptr, *ptr);
 
-#endif
+    return 0;
+}
