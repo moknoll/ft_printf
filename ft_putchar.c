@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moritzknoll <moritzknoll@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 19:17:44 by moritzknoll       #+#    #+#             */
-/*   Updated: 2024/11/04 16:42:30 by moritzknoll      ###   ########.fr       */
+/*   Created: 2024/11/04 13:19:31 by moritzknoll       #+#    #+#             */
+/*   Updated: 2024/11/04 16:44:27 by moritzknoll      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-#include <stdio.h>
-#include <unistd.h>
-#include <stdarg.h>
-#include <stdint.h>
+#include "ft_printf.h"
 
-int	ft_printf(const char *format, ...);
-int	ft_check_type(char type, va_list args);
-int	ft_putchar(char c);
-int	ft_putstr(char *s);
-int	ft_putunsigned(unsigned int nb);
-int	ft_putnbr(int nb);
-int	ft_puthex(uintptr_t num);
-int	ft_putHEX(uintptr_t num);
-int	ft_putptr(void *ptr);
-#endif
+int ft_putchar(char c)
+{
+	write(1, &c, 1);
+	return (1);
+}
+
+int	ft_putstr(char *s)
+{
+	int	c;
+
+	c = 0;
+	if (!s)
+		return (ft_putstr("(null)"));
+	while (s[c])
+	{
+		write(1, &s[c], 1);
+		c++;
+	}
+	return (c);
+}

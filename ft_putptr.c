@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moritzknoll <moritzknoll@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 10:52:15 by moritzknoll       #+#    #+#             */
-/*   Updated: 2024/11/04 11:15:10 by moritzknoll      ###   ########.fr       */
+/*   Created: 2024/11/04 13:28:28 by moritzknoll       #+#    #+#             */
+/*   Updated: 2024/11/04 16:43:44 by moritzknoll      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdint.h>
-#include <stdio.h>
+#include "ft_printf.h"
 
-int main() {
-    int a = 42;
-    int *ptr = &a;
-
-    printf("The adress is %p, the value is %d", ptr, *ptr);
-
-    return 0;
+int	ft_putptr(void *ptr)
+{
+	if (!ptr)
+		return (ft_putstr("NULL"));
+	int printed_chars = 0;
+	printed_chars += ft_putstr("0x");
+	printed_chars += ft_puthex((uintptr_t)ptr);
+	return (printed_chars);
 }
