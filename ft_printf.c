@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moritzknoll <moritzknoll@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:39:20 by moritzknoll       #+#    #+#             */
-/*   Updated: 2024/11/04 11:33:05 by moritzknoll      ###   ########.fr       */
+/*   Updated: 2024/11/04 12:47:00 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ static void	ft_putstr(char *s)
 	int	c;
 
 	c = 0;
+	if (!s)
+	{
+		return ;
+	}
 	while (s[c])
 	{
 		write(1, &s[c], 1);
@@ -59,39 +63,40 @@ static void	ft_putstr(char *s)
 }
 
 
-// ft_putunsigned(unsigned int);
-
 void	ft_puthex(uintptr_t num)
 {
-	char hex_digit;
+	char	hex_digit;
 
 	hex_digit = "0123456789abcdef"[num % 16];
-	 if (num == 0)
-    {
-        ft_putchar('0');
-        return;
-    }
-	if(num >= 16)
+	if (num == 0)
+	{
+		ft_putchar('0');
+		return ;
+	}
+	if (num >= 16)
 		ft_puthex(num / 16);
 	ft_putchar(hex_digit);
 }
 
 void	ft_putHEX(uintptr_t num)
 {
-	char hex_digit;
+	char	hex_digit;
 
 	hex_digit = "0123456789ABCDEF"[num % 16];
-	 if (num == 0)
-    {
-        ft_putchar('0');
-        return;
-    }
-	if(num >= 16)
+	if (num == 0)
+	{
+		ft_putchar('0');
+		return ;
+	}
+	if (num >= 16)
 		ft_putHEX(num / 16);
 	ft_putchar(hex_digit);
 }
 
-// ft_putpercent(void);
+void	ft_putpercent(void)
+{
+	ft_putchar('%');
+}
 
 void	ft_putptr(void *ptr)
 {
@@ -104,32 +109,53 @@ void	ft_putptr(void *ptr)
 	}
 }
 
+int	ft_putunsigned(unsigned int nb)
+{
+	char	buffer[10];
+	int		i;
+	int		printed_chars;
+
+	i = 0;
+	if (nb == 0)
+		ft_putchar('0');
+	while (nb > 0)
+	{
+		buffer[i++] = (nb % 10) + '0';
+		nb /= 10;
+	}
+	printed_chars = i;
+	while (i > 0)
+	{
+		i--;
+		write(1, &buffer[i], 1);
+	}
+	return (printed_chars);
+}
+
 void	ft_check_type(char type, va_list args)
 {
 	if (type == 'd' || type == 'i')
 		ft_putnbr(va_arg(args, int));
 	else if (type == 's')
-		if (args)
-			ft_putstr(va_arg(args, char *));
-		else
-			ft_putstr("(null)");
+		ft_putstr(va_arg(args, char *));
 	else if (type == 'c')
 		ft_putchar(va_arg(args, int));
 	else if (type == 'p')
-		ft_putptr(va_arg(args, void*));
-
-	// }
-	// else if (type == 'u')
-	// {
-
-	// }
-	// else if (type == '%')
+		ft_putptr(va_arg(args, void *));
+	else if (type == 'h')
+		ft_puthex(va_arg(args, uintptr_t));
+	else if (type == 'H')
+		ft_putHEX(va_arg(args, uintptr_t));
+	else if (type == 'u')
+		ft_putunsigned(va_arg(args, unsigned int));
+	else if (type == '%')
+		write(1, "%", 1);
 }
 
 int	ft_printf(const char *format, ...) {
-	va_list args;
-	int i ;
-	int printed_chars;
+	va_list	args;
+	int		i;
+	int		printed_chars;
 
 	va_start(args, format);
 	i = 0;
@@ -144,20 +170,18 @@ int	ft_printf(const char *format, ...) {
 		else
 		{
 			ft_putchar(format[i]);
-			i++;
+			printed_chars++;
 		}
+		i++;
 	}
 	va_end(args);
-	return printed_chars;
+	return (printed_chars);
 }
 
 
 int main()
 {
-	char *str =  "helllo";
-	int a = 42;
-    int *ptr = &a;
 
-	ft_printf("The adress is %p, the value is %d\n", ptr, *ptr);
-    printf("The adress is %p, the value is %d\n", ptr, *ptr);
+	ft_printf("%u\n", -123456);
+	printf("%u",-123456);
 }
