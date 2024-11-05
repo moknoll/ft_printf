@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printnbr.c                                      :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moritzknoll <moritzknoll@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:16:54 by moritzknoll       #+#    #+#             */
-/*   Updated: 2024/11/04 14:01:22 by moritzknoll      ###   ########.fr       */
+/*   Updated: 2024/11/05 10:56:08 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	ft_putunsigned(unsigned int nb)
 
 	i = 0;
 	if (nb == 0)
+	{
 		ft_putchar('0');
+		return (1);
+	}
 	while (nb > 0)
 	{
 		buffer[i++] = (nb % 10) + '0';
@@ -35,10 +38,11 @@ int	ft_putunsigned(unsigned int nb)
 	return (printed_chars);
 }
 
-int ft_putnbr(int nb)
+int	ft_putnbr(int nb)
 {
-	int count = 0;
+	int	count;
 
+	count = 0;
 	if (nb == -2147483648)
 	{
 		ft_putstr("-2147483648");

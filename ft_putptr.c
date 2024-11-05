@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moritzknoll <moritzknoll@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:28:28 by moritzknoll       #+#    #+#             */
-/*   Updated: 2024/11/04 16:43:44 by moritzknoll      ###   ########.fr       */
+/*   Updated: 2024/11/05 10:53:31 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 int	ft_putptr(void *ptr)
 {
+	int	printed_chars;
+
+	printed_chars = 0;
 	if (!ptr)
-		return (ft_putstr("NULL"));
-	int printed_chars = 0;
+		return (ft_putstr("(nil)"));
 	printed_chars += ft_putstr("0x");
 	printed_chars += ft_puthex((uintptr_t)ptr);
 	return (printed_chars);

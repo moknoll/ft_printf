@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moritzknoll <moritzknoll@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:39:20 by moritzknoll       #+#    #+#             */
-/*   Updated: 2024/11/04 16:53:06 by moritzknoll      ###   ########.fr       */
+/*   Updated: 2024/11/05 11:11:51 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_check_type(char type, va_list args)
 {
-	int printed_chars;
+	int	printed_chars;
 
 	printed_chars = 0;
 	if (type == 'd' || type == 'i')
@@ -25,10 +25,10 @@ int	ft_check_type(char type, va_list args)
 		printed_chars += ft_putchar(va_arg(args, int));
 	else if (type == 'p')
 		printed_chars += ft_putptr(va_arg(args, void *));
-	else if (type == 'h')
-		printed_chars += ft_puthex(va_arg(args, uintptr_t));
-	else if (type == 'H')
-		printed_chars += ft_putHEX(va_arg(args, uintptr_t));
+	else if (type == 'x')
+		printed_chars += ft_puthex(va_arg(args, unsigned int));
+	else if (type == 'X')
+		printed_chars += ft_puthex_upper(va_arg(args, unsigned int));
 	else if (type == 'u')
 		printed_chars += ft_putunsigned(va_arg(args, unsigned int));
 	else if (type == '%')
@@ -36,7 +36,8 @@ int	ft_check_type(char type, va_list args)
 	return (printed_chars);
 }
 
-int	ft_printf(const char *format, ...) {
+int	ft_printf(const char *format, ...)
+{
 	va_list	args;
 	int		i;
 	int		printed_chars;
